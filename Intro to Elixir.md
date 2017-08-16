@@ -117,9 +117,13 @@ Concurrency is a side effect
 # Functional
 
 ```elixir
-def serve_drinks(%User{age: age}) when age >= 21, do # Code that serves drinks!
+def serve_drinks(%User{age: age}) when age >= 21 do
+  # Code that serves drinks!
+end
 
-def serve_drinks(_), do: # Code that denies a drink
+def serve_drinks(_) do
+  # Code that denies a drink
+end
 
 serve_drinks User.get("John Doe")
 ```
@@ -309,6 +313,54 @@ title. # <= My Awesome Blog Post!
 
 ---
 
+# Doctests
+
+## Tests != Documentation
+
+## Documentation == Tests
+
+---
+
+# Doctests
+
+```elixir, [.highlight: 5-10, 12-14]
+defmodule Kitto.Generator do
+  @doc ~S"""
+  Parses arguments passed from command line.
+  Examples:
+      iex> Kitto.Generator.parse_options(["my_widget"])
+      {[], ["my_widget"], []}
+      iex> Kitto.Generator.parse_options(["-p", "dashboard_path", "my_dashboard"])
+      {[path: "dashboard_path"], ["my_dashboard"], []}
+      iex> Kitto.Generator.parse_options(["--path", "dash", "my_dashboard"])
+      {[path: "dash"], ["my_dashboard"], []}
+  """
+  def parse_options(argv) do
+    OptionParser.parse(argv, aliases: [p: :path])
+  end
+end
+```
+
+---
+
+```bash
+$ mix test test/generator_test.exs
+Excluding tags: [pending: true]
+
+...
+
+Finished in 0.05 seconds
+3 tests, 0 failures
+
+Randomized with seed 23502
+```
+
+---
+
+![fit](Pics/doctests.png)
+
+---
+
 # Cool!
 ## ...what can I do with it?
 
@@ -316,11 +368,11 @@ title. # <= My Awesome Blog Post!
 
 # Build web apps
 
-* ![inline](Pics/phoenix.png)
+![inline](Pics/phoenix.png)
 
 ^ Phoenix == The Rails of Elixir
 
-* Plug
+## [.fit] Plug
 
 ^ Plug ==  The Sinatra of Elixir
 
