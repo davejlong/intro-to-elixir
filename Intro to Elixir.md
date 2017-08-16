@@ -379,4 +379,9 @@ end
 
 ---
 
+## Slides on GitHub
+### [davejlong/intro-to-elixir](https://github.com/davejlong/intro-to-elixir)
+
+---
+
 # [.fit] Hack time!
